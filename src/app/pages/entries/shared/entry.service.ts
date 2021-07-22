@@ -2,8 +2,8 @@ import { Injectable, Injector } from "@angular/core";
 import { CategoryService } from "../../categories/shared/category.service";
 import { BaseResourceService } from "../../../shared/services/base-resource.service";
 import { Entry } from "./entry.model";
-import { map, catchError, flatMap } from "rxjs/operators";
-import { Observable, throwError } from "rxjs";
+import { flatMap } from "rxjs/operators";
+import { Observable } from "rxjs";
 
 @Injectable({
   providedIn: "root",
@@ -14,7 +14,7 @@ export class EntryService extends BaseResourceService<Entry> {
     protected injector: Injector,
     private categoryService: CategoryService
   ) {
-    super("api/entries", injector);
+    super("api/entries", injector, Entry.fromJson);
   }
 
    create(entry: Entry): Observable<Entry> {
@@ -38,7 +38,7 @@ export class EntryService extends BaseResourceService<Entry> {
   protected jsonDataToResources(jsonData: any[]): Entry[] {
     const entries: Entry[] = [];
     jsonData.forEach((element) => {
-      const entry = Object.assign(new Entry(), element);
+      const entry = Entry.fromJson(element)
       entries.push(entry);
     });
 
@@ -46,6 +46,6 @@ export class EntryService extends BaseResourceService<Entry> {
   }
 
   protected jsonDataToResource(jsonData: any): Entry {
-    return Object.assign(new Entry(), jsonData);
+    return Entry.fromJson(jsonData)
   }
 }
