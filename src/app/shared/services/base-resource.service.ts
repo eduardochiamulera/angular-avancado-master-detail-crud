@@ -62,7 +62,7 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
   }
 
   protected jsonDataToResource(jsonData: any): T {
-    return this.jsonDataToResource(jsonData);
+    return this.jsonDataToResourceFn(jsonData);
   }
 
   protected handleError(error: any): Observable<any> {
