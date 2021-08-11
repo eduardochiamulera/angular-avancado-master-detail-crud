@@ -11,11 +11,11 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel> imp
   ngOnInit() {
     this.resourceService.getAll().subscribe(
       resources => this.resources = resources,
-      error => alert('Erro ao carregar as categorias')
+      error => alert('Erro ao carregar os recursos')
     )
   }
 
-  deleteCategory(resource : T){
+  deleteResource(resource : T){
     const mustDelete = confirm("Deseja realmente excluir este item?");
     
     if(mustDelete){
