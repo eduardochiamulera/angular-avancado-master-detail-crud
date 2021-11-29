@@ -10,6 +10,7 @@ export abstract class BaseResourceListComponent<T extends BaseResourceModel> imp
   constructor(protected resourceService : BaseResourceService<T> ) { }
 
   ngOnInit() {
+    debugger;
     this.resourceService.getAll().subscribe(
       resources => this.resources = resources,
       error => alert('Erro ao carregar os recursos')

@@ -16,8 +16,13 @@ export abstract class BaseResourceService<T extends BaseResourceModel> {
   }
 
   getAll(): Observable<T[]> {
+    debugger;
     return this.http
-      .get(this.apiPath)
+      .get('https://localhost:44385/api'+this.apiPath, { headers : 
+      { 'EmpresaId' : '525CAC79-4352-4A12-A7A4-18395F1AAEC5',
+        'AppUser' : 'eduardofraga1994@gmail.com'
+      }    
+    })
       .pipe(map(this.jsonDataToResources.bind(this)), catchError(this.handleError));
   }
 
